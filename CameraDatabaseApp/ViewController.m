@@ -9,6 +9,8 @@
 #import "ViewController.h"
 #import "Photo.h"
 #import "PhotoDatabase.h"
+@import AssetsLibrary;
+#import "ALAssetsLibrary+CustomPhotoAlbum.h"
 
 @interface ViewController ()
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *takePhotoButton;
@@ -27,13 +29,13 @@
     self.savePhotoButton.enabled = NO;
 }
 
--(void)viewWillAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [self checkForCamera];
 }
 
--(void)checkForCamera
+- (void)checkForCamera
 {
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         self.takePhotoButton = [[UIBarButtonItem alloc] initWithTitle:@"Choose"
@@ -60,7 +62,7 @@
     return _photo;
 }
 
--(PhotoDatabase *)photoDB
+- (PhotoDatabase *)photoDB
 {
     if (!_photoDB) {
         _photoDB = [PhotoDatabase sharedDBInstance];
@@ -90,9 +92,17 @@
 {
     if (self.photo.imageUrl) {
         
-        NSLog(@"Saved Photo");
+        NSString *folderName = @"CameraDatabase App";
+        ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+        [library addAssetURL:self.photo.imageUrl
+                     toAlbum:folderName
+         withCompletionBlock:^(NSError *error) {
+             if (error) {
+                 NSLog(@"%@", error);
+             }
+         }];
+        
     }
-    
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
@@ -105,10 +115,14 @@
     if (picker.sourceType == UIImagePickerControllerSourceTypeCamera
         ||picker.sourceType == UIImagePickerControllerSourceTypePhotoLibrary) {
         UIImage *chosenImage = [info objectForKey:UIImagePickerControllerEditedImage];
+        if (!chosenImage) {
+            chosenImage = [info objectForKey:UIImagePickerControllerOriginalImage];
+        }
         self.imageView.image = chosenImage;
         self.savePhotoButton.enabled = YES;
+        self.photo.photoDictionary = [info mutableCopy];
         self.photo.imageUrl = [info objectForKey:UIImagePickerControllerReferenceURL];
-        self.photo.visibleRect = [info objectForKey:UIImagePickerControllerCropRect];
+        self.photo.visibleRect = [[info objectForKey:UIImagePickerControllerCropRect] CGRectValue];
         self.photo.dateTaken = [NSDate date];
         
     }

@@ -1,4 +1,4 @@
-//
+
 //  Photo.h
 //  CameraDatabaseApp
 //
@@ -11,8 +11,9 @@
 
 @interface Photo : NSObject
 
-@property (nonatomic) NSValue *visibleRect;
-@property (strong, nonatomic) NSURL *imageUrl;
+@property (nonatomic) CGRect visibleRect;
+@property (nonatomic, strong) NSURL *imageUrl;
+@property (strong, nonatomic) NSMutableDictionary *photoDictionary;
 @property (strong, nonatomic) NSDate *dateTaken;
 @property (nonatomic) CLLocationCoordinate2D *locationOfPhoto;
 

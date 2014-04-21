@@ -24,6 +24,7 @@
 		277A72DD18FA1AF60047451F /* CameraDatabaseAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 277A72DC18FA1AF60047451F /* CameraDatabaseAppTests.m */; };
 		277A72EB18FA21B20047451F /* PhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 277A72EA18FA21B20047451F /* PhotoViewController.m */; };
 		27A7965A18FDEBFB00502069 /* PhotoDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 27A7965918FDEBFB00502069 /* PhotoDatabase.m */; };
+		5C8B55091905C06700269085 /* ALAssetsLibrary+CustomPhotoAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C8B55081905C06700269085 /* ALAssetsLibrary+CustomPhotoAlbum.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,8 @@
 		277A72EA18FA21B20047451F /* PhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoViewController.m; sourceTree = "<group>"; };
 		27A7965818FDEBFB00502069 /* PhotoDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoDatabase.h; sourceTree = "<group>"; };
 		27A7965918FDEBFB00502069 /* PhotoDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoDatabase.m; sourceTree = "<group>"; };
+		5C8B55071905C06700269085 /* ALAssetsLibrary+CustomPhotoAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALAssetsLibrary+CustomPhotoAlbum.h"; sourceTree = "<group>"; };
+		5C8B55081905C06700269085 /* ALAssetsLibrary+CustomPhotoAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ALAssetsLibrary+CustomPhotoAlbum.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +133,7 @@
 				274CA91218FAFC370027DE23 /* Photo.m */,
 				277A72E918FA21B20047451F /* PhotoViewController.h */,
 				277A72EA18FA21B20047451F /* PhotoViewController.m */,
+				5C8B550A1905CB1100269085 /* ALAssetsLibrary Categories */,
 				27A7965818FDEBFB00502069 /* PhotoDatabase.h */,
 				27A7965918FDEBFB00502069 /* PhotoDatabase.m */,
 				277A72C918FA1AF60047451F /* Images.xcassets */,
@@ -165,6 +169,15 @@
 				277A72D918FA1AF60047451F /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5C8B550A1905CB1100269085 /* ALAssetsLibrary Categories */ = {
+			isa = PBXGroup;
+			children = (
+				5C8B55071905C06700269085 /* ALAssetsLibrary+CustomPhotoAlbum.h */,
+				5C8B55081905C06700269085 /* ALAssetsLibrary+CustomPhotoAlbum.m */,
+			);
+			name = "ALAssetsLibrary Categories";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -264,6 +277,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C8B55091905C06700269085 /* ALAssetsLibrary+CustomPhotoAlbum.m in Sources */,
 				277A72C818FA1AF60047451F /* ViewController.m in Sources */,
 				27A7965A18FDEBFB00502069 /* PhotoDatabase.m in Sources */,
 				277A72EB18FA21B20047451F /* PhotoViewController.m in Sources */,
