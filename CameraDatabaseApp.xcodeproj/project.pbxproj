@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		20103135190C401800014485 /* MJCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 20103132190C401800014485 /* MJCollectionViewCell.m */; };
+		202EC596190C14AF004D0ADC /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 202EC595190C14AF004D0ADC /* libsqlite3.0.dylib */; };
+		20907744190C6ABC00D02D5A /* PhotoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20907743190C6ABC00D02D5A /* PhotoDetailViewController.m */; };
 		274CA91318FAFC370027DE23 /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 274CA91218FAFC370027DE23 /* Photo.m */; };
 		277A72B218FA1AF60047451F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 277A72B118FA1AF60047451F /* Foundation.framework */; };
 		277A72B418FA1AF60047451F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 277A72B318FA1AF60047451F /* CoreGraphics.framework */; };
@@ -38,6 +41,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		20103132190C401800014485 /* MJCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJCollectionViewCell.m; sourceTree = "<group>"; };
+		20103133190C401800014485 /* MJCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJCollectionViewCell.h; sourceTree = "<group>"; };
+		202EC595190C14AF004D0ADC /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		20907742190C6ABC00D02D5A /* PhotoDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoDetailViewController.h; sourceTree = "<group>"; };
+		20907743190C6ABC00D02D5A /* PhotoDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoDetailViewController.m; sourceTree = "<group>"; };
 		274CA91118FAFC370027DE23 /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photo.h; sourceTree = "<group>"; };
 		274CA91218FAFC370027DE23 /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
 		277A72AE18FA1AF60047451F /* CameraDatabaseApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CameraDatabaseApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -72,6 +80,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				202EC596190C14AF004D0ADC /* libsqlite3.0.dylib in Frameworks */,
 				277A72B418FA1AF60047451F /* CoreGraphics.framework in Frameworks */,
 				277A72B618FA1AF60047451F /* UIKit.framework in Frameworks */,
 				277A72B218FA1AF60047451F /* Foundation.framework in Frameworks */,
@@ -91,6 +100,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		20103136190C401C00014485 /* MJParallaxCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				20103133190C401800014485 /* MJCollectionViewCell.h */,
+				20103132190C401800014485 /* MJCollectionViewCell.m */,
+			);
+			name = MJParallaxCollectionView;
+			sourceTree = "<group>";
+		};
 		277A72A518FA1AF60047451F = {
 			isa = PBXGroup;
 			children = (
@@ -113,6 +131,7 @@
 		277A72B018FA1AF60047451F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				202EC595190C14AF004D0ADC /* libsqlite3.0.dylib */,
 				277A72B118FA1AF60047451F /* Foundation.framework */,
 				277A72B318FA1AF60047451F /* CoreGraphics.framework */,
 				277A72B518FA1AF60047451F /* UIKit.framework */,
@@ -124,6 +143,7 @@
 		277A72B718FA1AF60047451F /* CameraDatabaseApp */ = {
 			isa = PBXGroup;
 			children = (
+				20103136190C401C00014485 /* MJParallaxCollectionView */,
 				277A72C018FA1AF60047451F /* AppDelegate.h */,
 				277A72C118FA1AF60047451F /* AppDelegate.m */,
 				277A72C318FA1AF60047451F /* Main.storyboard */,
@@ -136,6 +156,8 @@
 				5C8B550A1905CB1100269085 /* ALAssetsLibrary Categories */,
 				27A7965818FDEBFB00502069 /* PhotoDatabase.h */,
 				27A7965918FDEBFB00502069 /* PhotoDatabase.m */,
+				20907742190C6ABC00D02D5A /* PhotoDetailViewController.h */,
+				20907743190C6ABC00D02D5A /* PhotoDetailViewController.m */,
 				277A72C918FA1AF60047451F /* Images.xcassets */,
 				277A72B818FA1AF60047451F /* Supporting Files */,
 			);
@@ -281,7 +303,9 @@
 				277A72C818FA1AF60047451F /* ViewController.m in Sources */,
 				27A7965A18FDEBFB00502069 /* PhotoDatabase.m in Sources */,
 				277A72EB18FA21B20047451F /* PhotoViewController.m in Sources */,
+				20907744190C6ABC00D02D5A /* PhotoDetailViewController.m in Sources */,
 				277A72C218FA1AF60047451F /* AppDelegate.m in Sources */,
+				20103135190C401800014485 /* MJCollectionViewCell.m in Sources */,
 				274CA91318FAFC370027DE23 /* Photo.m in Sources */,
 				277A72BE18FA1AF60047451F /* main.m in Sources */,
 			);

@@ -12,9 +12,11 @@
 @import AssetsLibrary;
 #import "ALAssetsLibrary+CustomPhotoAlbum.h"
 
-@interface ViewController ()
+@interface ViewController () <UITextFieldDelegate>
+@property (strong, nonatomic) UITapGestureRecognizer *tappedBackground;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *takePhotoButton;
 @property (weak, nonatomic) IBOutlet UIButton *savePhotoButton;
+@property (weak, nonatomic) IBOutlet UITextField *photoNameTextField;
 @property (strong, nonatomic) Photo *photo;
 @property (strong, nonatomic) PhotoDatabase *photoDB;
 
@@ -27,6 +29,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     self.savePhotoButton.enabled = NO;
+	self.photoNameTextField.delegate = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -47,11 +50,19 @@
     }
 }
 
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (UITapGestureRecognizer *) tappedBackground
+{
+	if (!_tappedBackground) {
+		_tappedBackground = [[UITapGestureRecognizer alloc] initWithTarget:self
+																	action:@selector(didTapBackground:)];
+	}
+	return _tappedBackground;
 }
 
 - (Photo *)photo
@@ -65,7 +76,7 @@
 - (PhotoDatabase *)photoDB
 {
     if (!_photoDB) {
-        _photoDB = [PhotoDatabase sharedDBInstance];
+        _photoDB = [[PhotoDatabase alloc] init];
     }
     return _photoDB;
 }
@@ -74,7 +85,7 @@
 {
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
-    picker.allowsEditing = YES;
+    picker.allowsEditing = NO;
     picker.sourceType = UIImagePickerControllerSourceTypeCamera;
     [self presentViewController:picker animated:YES completion:NULL];
 }
@@ -83,14 +94,42 @@
 {
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
-    picker.allowsEditing = YES;
+    picker.allowsEditing = NO;
     picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     [self presentViewController:picker animated:YES completion:NULL];
 }
 
+- (BOOL)isTextFieldReadyForSaving
+{
+	if ([self.photoNameTextField.text length] > 0) {
+		return YES;
+	}
+	return NO;
+}
+
+- (BOOL)isImageReadyForSaving
+{
+	if (self.photo.imageUrl == nil) {
+		return NO;
+	}
+	return YES;
+}
+
 - (IBAction)savePhoto:(UIButton *)sender
 {
-    if (self.photo.imageUrl) {
+	if (![self isTextFieldReadyForSaving]) {
+		[[[UIAlertView alloc] initWithTitle:@"Uh-oh"
+									message:@"Please enter the name of the Photo"
+								   delegate:nil
+						  cancelButtonTitle:@"OK"
+						  otherButtonTitles:nil] show];
+		return;
+	}
+
+	self.photo.name = self.photoNameTextField.text;
+
+	
+    if ([self isImageReadyForSaving]) {
         
         NSString *folderName = @"CameraDatabase App";
         ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
@@ -100,9 +139,37 @@
              if (error) {
                  NSLog(@"%@", error);
              }
+			 else{
+				 BOOL isPhotoSaved = [self.photoDB savePhoto:self.photo];
+				 if (!isPhotoSaved) {
+					 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Uh-oh"
+																	 message:@"It seems your photo did not save. Please try again"
+																	delegate:nil
+														   cancelButtonTitle:@"OK"
+														   otherButtonTitles:nil];
+					 [alert show];
+				 }
+				 else
+				 {
+					 [[[UIAlertView alloc] initWithTitle:@"Saved"
+												 message:@"Your Photo has been saved"
+												delegate:nil
+									   cancelButtonTitle:@"OK"
+									   otherButtonTitles:nil] show];
+					 self.photoNameTextField.text = nil;
+					 self.imageView.image = nil;
+					 self.photo = nil;
+				 }
+			 }
          }];
         
     }
+	
+}
+
+- (void)didTapBackground:(UITapGestureRecognizer *)sender
+{
+	[self.view endEditing:YES];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
@@ -122,7 +189,7 @@
         self.savePhotoButton.enabled = YES;
         self.photo.photoDictionary = [info mutableCopy];
         self.photo.imageUrl = [info objectForKey:UIImagePickerControllerReferenceURL];
-        self.photo.visibleRect = [[info objectForKey:UIImagePickerControllerCropRect] CGRectValue];
+//        self.photo.visibleRect = [[info objectForKey:UIImagePickerControllerCropRect] CGRectValue];
         self.photo.dateTaken = [NSDate date];
         
     }
@@ -130,6 +197,13 @@
     [picker dismissViewControllerAnimated:YES
                                completion:NULL];
     
+}
+
+#pragma mark - UITextFieldDelegate
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+	[self.view endEditing:YES];
+	return YES;
 }
 
 @end

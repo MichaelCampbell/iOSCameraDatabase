@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PhotoViewController : UICollectionViewController
+@interface PhotoViewController : UICollectionViewController <UICollectionViewDataSource, UICollectionViewDataSource, UIScrollViewDelegate>
+
+@property (nonatomic, strong) NSMutableArray* images;
 
 @end

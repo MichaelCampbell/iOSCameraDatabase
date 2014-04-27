@@ -11,10 +11,11 @@
 
 @interface Photo : NSObject
 
-@property (nonatomic) CGRect visibleRect;
+//@property (nonatomic) CGRect visibleRect;
+@property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSURL *imageUrl;
 @property (strong, nonatomic) NSMutableDictionary *photoDictionary;
 @property (strong, nonatomic) NSDate *dateTaken;
-@property (nonatomic) CLLocationCoordinate2D *locationOfPhoto;
+//@property (nonatomic) CLLocationCoordinate2D *locationOfPhoto;
 
 @end
